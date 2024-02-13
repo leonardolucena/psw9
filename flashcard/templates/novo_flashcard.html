@@ -30,25 +30,25 @@
                             {% endfor %}
                         {% endif %}
                         <br>
-                        <label>Pergunta</label>
-                        <input type="text" class="form-control" placeholder="pergunta" name="pergunta">
+                            <label for="pergunta">Pergunta</label>
+                            <input type="text" class="form-control pergunta" id="pergunta" name="pergunta">
                         <br>
-                        <label>Resposta</label>
-                        <textarea class="form-control" name="resposta"></textarea>
+                            <label for="resposta">Resposta</label>
+                            <textarea class="form-control" id="resposta" name="resposta"></textarea>
                         <br>
                         <div class="row">
                             
                                 <div class="col-md">
-                                    <label for="">Categoria</label>
-                                    <select class="form-select" name="categoria">
+                                    <label for="categoria">Categoria</label>
+                                    <select class="form-select" id="categoria" name="categoria">
                                         {% for categoria in categorias %}
                                             <option value="{{categoria.id}}">{{categoria}}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
                                 <div class="col-md">
-                                    <label for="">Dificuldade</label>
-                                    <select class="form-select" name="dificuldade">
+                                    <label for="dificuldade">Dificuldade</label>
+                                    <select class="form-select" id="dificuldade" name="dificuldade">
                                         {% for dificuldade in dificuldades %}
                                             <option value="{{dificuldade.0}}">{{dificuldade.1}}</option>
                                         {% endfor %}
@@ -60,8 +60,6 @@
                         <br>
                         <input type="submit" value="Enviar" class="btn-cadastro">
                         <br>
-                        <br>
-                        <br>
                     </form>
                 </div>
 
@@ -70,8 +68,8 @@
                 <form action="{% url 'novo_flashcard' %}" method="GET"> {% csrf_token %}
                     <div class="row">
                         <div class="col-md">
-                            <label for="">Categoria</label>
-                            <select name="categoria" id="" class="form-select">
+                            <label for="categoria">Categoria</label>
+                            <select name="categoria" id="categoria" class="form-select">
                                 <option value="">Todas as Categorias</option>
                                 {% for categoria in categorias %}
                                     <option value="{{categoria.id}}">{{categoria}}</option>
@@ -79,8 +77,8 @@
                             </select>
                         </div>
                         <div class="col-md">
-                            <label for="">Dificuldade</label>
-                            <select name="dificuldade" id="" class="form-select">
+                            <label for="dificuldade">Dificuldade</label>
+                            <select name="dificuldade" id="dificuldade" class="form-select">
                                 <option value="">Todas as Dificuldades</option>
                                 {% for dificuldade in dificuldades %}
                                     <option value="{{dificuldade.0}}">{{dificuldade.1}}</option>
@@ -99,7 +97,7 @@
                 <br>
                 {% for flash in flashcards %}
                     <div class="box-new-flashcard" onclick="flip_card({{flash.id}})">
-                        <div class="flashcard ">
+                        <div class="flashcard">
 
                             <div class="flashcard-categoria">
                                 {{flash.categoria}}
