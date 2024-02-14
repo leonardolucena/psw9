@@ -85,3 +85,7 @@
     padding-right: 25px;
     color: #fff;
 }
+.btn-cadastro:hover{
+    background-color: #35b395;
+    transition: 0.5s;
+}
