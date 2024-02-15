@@ -117,17 +117,10 @@ def listar_desafio(request):
         dificuldade_filtrar = request.GET.get('dificuldade')
         if categoria_filtrar:
             desafios = desafios.filter(categoria__id=categoria_filtrar)
+            
         if dificuldade_filtrar:
             desafios = desafios.filter(dificuldade=dificuldade_filtrar)
-        return render(
-            request,
-            'listar_desafio.html',
-            {
-                'desafios': desafios,
-                'categorias': categorias,
-                'dificuldades': dificuldades
-            },
-        )
+        return render(request,'listar_desafio.html',{'desafios': desafios,'categorias': categorias,'dificuldades': dificuldades},)
     
 def desafio(request, id):
     desafio = Desafio.objects.get(id=id)

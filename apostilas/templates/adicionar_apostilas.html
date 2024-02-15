@@ -32,11 +32,14 @@
                     {% endif %}
                     <form action="{% url 'adicionar_apostilas' %}" method="POST" enctype='multipart/form-data'>{% csrf_token %}
                         <p class="fonte-secundaria">Adicionar resumos</p>
-                        <label>Titulo</label>
-                        <input type="text" name="titulo" placeholder="titulo" class="form-control">
+                        <label for="titulo">Titulo</label>
+                        <input type="text" name="titulo" id="titulo" class="form-control">
                         <br>
-                        <label>Arquivo</label>
-                        <input type="file" name="arquivo" class="form-control">
+                        <label for="arquivo">Arquivo</label>
+                        <input type="file" name="arquivo" id="arquivo" class="form-control">
+                        <br>
+                        <label for="tags">Tags(separadas por ,)</label>
+                        <input type="text" name="tags" id="tags" class="form-control">
                         <br>
                         <input type="submit" class="btn-cadastro" value="Enviar">
                     </form>
