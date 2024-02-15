@@ -135,5 +135,12 @@
             }
         }
     </script>
+
+    <script>
+        {% for categoria in categorias %}
+            <option value="{{categoria.id}}">{{categoria}}</option>
+            console.log({{categoria}})
+        {% endfor %}
+    </script>
     
 {% endblock 'conteudo' %}
