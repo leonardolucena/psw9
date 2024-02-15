@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.safestring import mark_safe
 
 class Categoria(models.Model):
     nome = models.CharField(max_length=20)
@@ -48,3 +49,9 @@ class Desafio(models.Model):
 
     def __str__(self):
         return self.titulo
+    
+    def status(self):
+        if self.flashcards.filter(respondido=False).exists():
+            return 'Em aberto'
+        else:
+            return 'Concluído'

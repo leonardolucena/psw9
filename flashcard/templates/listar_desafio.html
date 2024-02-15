@@ -21,8 +21,8 @@
         <div class="row">
             <div class="col-md">
                 <form action="{% url 'listar_desafio' %}" method="GET">{% csrf_token %}
-                <label for="">Categoria</label>
-                <select name="categoria" class="form-select">
+                <label for="categoria">Categoria</label>
+                <select name="categoria" id="categoria" class="form-select">
                     <option value="">Todas as Categorias</option>
                     {% for categoria in categorias %}
                         <option value="{{categoria.id}}">{{categoria}}</option>
@@ -30,8 +30,8 @@
                 </select>
             </div>
             <div class="col-md">
-                <label for="">Dificuldade</label>
-                <select name="dificuldade" class="form-select">
+                <label for="dificuldade">Dificuldade</label>
+                <select name="dificuldade" id="dificuldade" class="form-select">
                     <option value="">Todas as Dificuldades</option>
                     {% for dificuldade in dificuldades %}
                         <option value="{{dificuldade.0}}">{{dificuldade.1}}</option>
@@ -62,12 +62,17 @@
                             <th><a href="{% url 'desafio' desafio.id %}">{{desafio.id}}</a></th>
                             <td>{{desafio.titulo}}</td>
                             <td>{{desafio.get_dificuldade_display}}</td>
-                            <td>{{desafio.status}}</td>
+                            <td>
+                                {% if desafio.status == 'Em aberto' %}
+                                    <span class="badge bg-primary">Em aberto</span>
+                                {% else %}
+                                    <span class="badge bg-success">Concluído</span>
+                                {% endif %}
+                            </td>
                         </tr>
-                  {% endfor %}
+                    {% endfor %}
                 </tbody>
               </table>
         </div>
     </div>
-    <script src="{% static 'flashcard/js/flashcard.js' %}"></script>
 {% endblock 'conteudo' %}

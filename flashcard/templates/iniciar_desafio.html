@@ -22,12 +22,12 @@
             
                 <div class="col-md">
                     <form action="{% url 'iniciar_desafio' %}" method="POST">{% csrf_token%}
-                    <label for="">Titulo</label>
-                    <input type="text" class="form-control" name="titulo">
+                    <label for="titulo">Titulo</label>
+                    <input type="text" id="titulo" class="form-control" name="titulo">
                 </div>
                 <div class="col-md">
-                    <label>Categoria</label>
-                    <select name="categoria" class="form-select" multiple>
+                    <label for="categoria">Categoria</label>
+                    <select name="categoria" id="categoria" class="form-select" multiple>
                         {% for categoria in categorias %}
                             <option value="{{categoria.id}}">
                                 {{categoria.nome}}
@@ -36,8 +36,8 @@
                     </select>
                 </div>
                 <div class="col-md">
-                    <label>Dificuldade</label>
-                    <select name="dificuldade" class="form-select">
+                    <label for="dificuldade">Dificuldade</label>
+                    <select name="dificuldade" id="dificuldade" class="form-select">
                         {% for dificuldade in dificuldades %}
                             <option value="{{dificuldade.0}}">
                                 {{dificuldade.1}}
@@ -47,8 +47,8 @@
                 </div>
 
                 <div class="col-md">
-                    <label>Qtd questões</label>
-                    <input type="number" class="form-control" name="qtd_perguntas">
+                    <label for="qtd">Qtd questões</label>
+                    <input type="number" id="qtd" class="form-control" name="qtd_perguntas">
                 </div>
             
         </div>
