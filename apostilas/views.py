@@ -19,7 +19,7 @@ def adicionar_apostilas(request):
         list_tags = tags.split(',')
         
         for tag in list_tags:
-            nova_tag = Tags(name=tag)
+            nova_tag = Tags(nome=tag)
             nova_tag.save()
             apostila.tags.add(nova_tag)
         

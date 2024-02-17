@@ -68,5 +68,21 @@
                   <p class="fonte-secundaria">Views totais: {{views_totais}}</p>
             </div>
         </div>
+        <hr>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md">
+                <div class="box-form">
+                    <form action="" method="GET" enctype='multipart/form-data'>
+                        <p class="fonte-secundaria">Buscar resumos</p>
+                        <label for="tags">Tags</label>
+                        <input type="text" name="tags" id="tags" class="form-control">
+                        <br>
+                        <input type="submit" class="btn-cadastro" value="Buscar">
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock 'conteudo' %}
