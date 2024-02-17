@@ -157,19 +157,22 @@ def responder_flashcard(request, id):
 
 def relatorio(request, id):
     desafio = Desafio.objects.get(id=id)
-
-
     acertos = desafio.flashcards.filter(acertou=True).count()
-    erros = desafio.flashcards.filter(acertou=False).count()
+    erros = desafio.flashcards.filter(respondido=True, acertou=False).count()
 
     dados = [acertos, erros]
-
 
     categorias = desafio.categoria.all()
     name_categoria = [i.nome for i in categorias]
 
     dados2 = []
+    dados3 = []
     for categoria in categorias:
-        dados2.append(desafio.flashcards.filter(flashcard__categoria=categoria).filter(acertou=True).count())
+        acertos_categoria = desafio.flashcards.filter(flashcard__categoria=categoria, acertou=True).count()
+        erros_categoria = desafio.flashcards.filter(flashcard__categoria=categoria, respondido=True, acertou=False).count()
+        dados2.append(acertos_categoria)
+        dados3.append(erros_categoria)
 
-    return render(request, 'relatorio.html', {'desafio': desafio, 'dados': dados, 'categorias': name_categoria, 'dados2': dados2,},)
+    dados_categorias = list(zip(name_categoria, dados2, dados3))
+
+    return render(request, 'relatorio.html', {'desafio': desafio, 'dados': dados, 'categorias': name_categoria, 'dados2': dados2, 'dados3': dados3, 'dados_categorias': dados_categorias})

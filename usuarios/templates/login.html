@@ -13,10 +13,10 @@
                 <div class="col-md">
                     <div class="box-titulo">
                         <div class="box-titulo-item">
-                            <img src="{% static 'usuarios/img/logo.png' %}">
+                            <img alt="logo" src="{% static 'usuarios/img/logo.png' %}">
                         </div>
                         <div style="margin-top: auto; margin-bottom: auto;" class="box-titulo-item">
-                            <h3 >Study.Async</h3>
+                            <h3 >School Pythonando</h3>
                         </div>
                     </div>
                     <hr class="divisor">
@@ -45,12 +45,13 @@
                             {% endfor %}
                         {% endif %}
                         <form action="{% url 'logar' %}" method="POST">{% csrf_token %}
-                            <label>Username</label>
-                            <input type="text" class="input-form" name="username" id="">
+                            <label for="username" >Username</label>
+                            <input id="username" type="text" class="input-form" name="username">
                             <br>
                             <br>
-                            <label>Senha</label>
-                            <input type="password" class="input-form" name="senha" id="">
+                            <label for="senha" >Senha</label>
+                            <input id="senha" type="password" class="input-form" name="senha">
+                            <a id="id_cadastro" href="{% url 'cadastro' %}">Cadastar uma nova conta</a>
                             <br>
                             <br>
                             <input type="submit" value="Enviar" class="btn-cadastro">

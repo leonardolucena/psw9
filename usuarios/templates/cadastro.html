@@ -14,10 +14,10 @@
                 <div class="col-md">
                     <div class="box-titulo">
                         <div class="box-titulo-item">
-                            <img src="{% static 'usuarios/img/logo.png' %}">
+                            <img alt="logo" src="{% static 'usuarios/img/logo.png' %}">
                         </div>
                         <div style="margin-top: auto; margin-bottom: auto;" class="box-titulo-item">
-                            <h3 >Study.Async</h3>
+                            <h3>School Pythonando</h3>
                         </div>
                     </div>
                     <hr class="divisor">
@@ -46,16 +46,16 @@
                             {% endfor %}
                         {% endif %}
                         <form action="{% url 'cadastro' %}" method="POST">{% csrf_token %}
-                            <label>Username</label>
-                            <input type="text" class="input-form" name="username" id="username">
+                            <label for="username" >Username</label>
+                            <input id="username" type="text" class="input-form" name="username" id="username">
                             <br>
                             <br>
-                            <label>Senha</label>
-                            <input type="password" class="input-form" name="senha" id="senha">
+                            <label for="senha" >Senha</label>
+                            <input id="senha" type="password" class="input-form" name="senha" id="senha">
                             <br>
                             <br>
-                            <label>Confirmar senha</label>
-                            <input type="password" class="input-form" name="confirmar_senha" id="confirmar_senha">
+                            <label for="confirmar_senha" >Confirmar senha</label>
+                            <input id="confirmar_senha" type="password" class="input-form" name="confirmar_senha" id="confirmar_senha">
                             <br>
                             <br>
                             <input type="submit" value="Enviar" class="btn-cadastro">

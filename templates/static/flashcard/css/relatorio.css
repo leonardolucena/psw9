@@ -1,0 +1,27 @@
+.divCards{
+    width: 160px;
+    height: 66px;
+    margin: 10px;
+}
+.tituloCard{
+    background: #0F1825;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+    padding: 14px;
+    border-radius: 4px 4px 0 0;
+}
+.conteudoCard{
+    background: #122342;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+    padding: 14px;
+    border-radius: 0 0 4px 4px;
+}

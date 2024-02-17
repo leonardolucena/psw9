@@ -7,6 +7,7 @@
     <link href="{% static 'flashcard/css/novo_flashcard.css' %}" rel="stylesheet">
     <link href="{% static 'flashcard/css/iniciar_desafio.css' %}" rel="stylesheet">
     <link href="{% static 'flashcard/css/desafio.css' %}" rel="stylesheet">
+    <link href="{% static 'flashcard/css/relatorio.css' %}" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 {% endblock 'cabecalho' %}
@@ -33,8 +34,29 @@
                 </div>
             </div>
         </div>
-
+        <hr>
+        <div class="row">
+          <div class="col-md">
+              <p class="fonte-secundaria">Melhores matérias</p>
+              <div class="d-flex flex-wrap justify-content-center">
+                {% for categoria, acertos, erros in dados_categorias %}
+                  <div class="divCards">
+                    <div class="tituloCard">{{ categoria }}</div>
+                    <div class="conteudoCard">
+                      <div>Acertos: {{ acertos }}</div>
+                      <div>Erros: {{ erros }}</div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+          </div>
+          <div class="col-md">
+              <p class="fonte-secundaria">Piores matérias</p>
+              <br>
+          </div>
+      </div>
     </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const ctx = document.getElementById('grafico1');
