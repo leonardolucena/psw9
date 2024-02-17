@@ -175,4 +175,21 @@ def relatorio(request, id):
 
     dados_categorias = list(zip(name_categoria, dados2, dados3))
 
-    return render(request, 'relatorio.html', {'desafio': desafio, 'dados': dados, 'categorias': name_categoria, 'dados2': dados2, 'dados3': dados3, 'dados_categorias': dados_categorias})
+    melhores_categorias = []
+    piores_categorias = []
+    for categoria, acertos, erros in dados_categorias:
+        if acertos > erros:
+            melhores_categorias.append((categoria, acertos, erros))
+        elif erros >= acertos:
+            piores_categorias.append((categoria, acertos, erros))
+
+    return render(request, 'relatorio.html', {
+        'desafio': desafio,
+        'dados': dados,
+        'categorias': name_categoria,
+        'dados2': dados2,
+        'dados3': dados3,
+        'dados_categorias': dados_categorias,
+        'melhores_categorias': melhores_categorias,
+        'piores_categorias': piores_categorias,
+    })

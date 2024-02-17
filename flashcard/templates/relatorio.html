@@ -22,38 +22,47 @@
             <div class="col-md">
                 <p class="fonte-secundaria">{{desafio.titulo}}</p>
                 <hr>
+                <p class="tituloSecundario" >Quantidade de acertos e erros</p>
                 <canvas id="grafico1"></canvas>
             </div>
             <div class="col-md">
                 <br><br><br><br>
-                
-                <div style="background-color: white;">
-
+                <p class="tituloSecundario">Acertos por área do conhecimento</p>
+                <div style="background-color: white; padding: 15px; border-radius:8px">
                     <canvas id="grafico2"></canvas>
-
                 </div>
             </div>
         </div>
         <hr>
         <div class="row">
           <div class="col-md">
-              <p class="fonte-secundaria">Melhores matérias</p>
-              <div class="d-flex flex-wrap justify-content-center">
-                {% for categoria, acertos, erros in dados_categorias %}
+            <p class="fonte-secundaria">Melhores matérias</p>
+            <div class="d-flex flex-wrap justify-content-center">
+                {% for categoria, acertos, erros in melhores_categorias %}
                   <div class="divCards">
-                    <div class="tituloCard">{{ categoria }}</div>
-                    <div class="conteudoCard">
-                      <div>Acertos: {{ acertos }}</div>
-                      <div>Erros: {{ erros }}</div>
-                    </div>
+                      <div class="tituloCard">{{ categoria }}</div>
+                      <div class="conteudoCard">
+                          <div>Acertos: {{ acertos }}</div>
+                          <div>Erros: {{ erros }}</div>
+                      </div>
                   </div>
                 {% endfor %}
-              </div>
-          </div>
-          <div class="col-md">
-              <p class="fonte-secundaria">Piores matérias</p>
-              <br>
-          </div>
+            </div>
+        </div>
+        <div class="col-md">
+            <p class="fonte-secundaria">Piores matérias</p>
+            <div class="d-flex flex-wrap justify-content-center">
+                {% for categoria, acertos, erros in piores_categorias %}
+                  <div class="divCards">
+                      <div class="tituloCard">{{ categoria }}</div>
+                      <div class="conteudoCard">
+                          <div>Acertos: {{ acertos }}</div>
+                          <div>Erros: {{ erros }}</div>
+                      </div>
+                  </div>
+                {% endfor %}
+            </div>
+        </div>        
       </div>
     </div>
     
@@ -84,7 +93,7 @@
             data: {
               labels: {{categorias|safe}},
               datasets: [{
-                label: 'Qtd',
+                label: 'Quantidade',
                 data: {{dados2}},
                 borderWidth: 1,
                 fill: true,
