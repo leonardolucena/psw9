@@ -40,3 +40,15 @@ def apostila(request, id):
     views_unicas = ViewApostila.objects.filter(apostila=apostila).values('ip').distinct().count()
     views_totais = ViewApostila.objects.filter(apostila=apostila).count()
     return render(request, 'apostila.html', {'apostila': apostila, 'views_unicas': views_unicas, 'views_totais': views_totais})    
+
+def listar_tags(request):
+    if request.method == 'GET':
+        apostilas = Apostila.objects.filter(user=request.user)
+        
+        tag_filtrar = request.GET.get('tags')
+        if tag_filtrar:
+            apostilas_filtradas = apostilas.filter(tags__nome__icontains=tag_filtrar)
+        else:
+            apostilas_filtradas = apostilas
+
+        return render(request, 'adicionar_apostilas.html', {'apostilas': apostilas, 'apostilas_filtradas': apostilas_filtradas})

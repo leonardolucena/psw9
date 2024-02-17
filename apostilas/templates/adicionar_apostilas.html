@@ -47,25 +47,26 @@
 
             </div>
             <div class="col-md">
-
-                <table>
+                <table id="tabela1">
                     <thead>
-                      <tr>
+                    <tr>
                         <th scope="col">Titulo</th>
+                        <th scope="col">Tag</th>
                         <th scope="col">Ação</th>
-                      </tr>
+                    </tr>
                     </thead>
                     <tbody>
                         {% for apostila in apostilas %}
                             <tr class="linha">
                                 <td>{{apostila.titulo}}</td>
+                                <td>{% for tag in apostila.lista_de_tags %}{{ tag }}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
                                 <td><a href="{% url 'apostila' apostila.id %}" style="color: #fff; text-decoration: none;" class="btn-cadastro">Abrir</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>
-                  </table>
-                  <hr>
-                  <p class="fonte-secundaria">Views totais: {{views_totais}}</p>
+                </table>
+                <hr>
+                <p class="fonte-secundaria">Views totais: {{views_totais}}</p>
             </div>
         </div>
         <hr>
@@ -74,7 +75,7 @@
         <div class="row">
             <div class="col-md">
                 <div class="box-form">
-                    <form action="" method="GET" enctype='multipart/form-data'>
+                    <form action="{% url 'listar_tags' %}" method="GET" enctype='multipart/form-data'>
                         <p class="fonte-secundaria">Buscar resumos</p>
                         <label for="tags">Tags</label>
                         <input type="text" name="tags" id="tags" class="form-control">
@@ -82,6 +83,34 @@
                         <input type="submit" class="btn-cadastro" value="Buscar">
                     </form>
                 </div>
+            </div>
+            <div class="col-md">
+                {% if apostilas_filtradas %}
+                    <table id="tabela2">
+                        <thead>
+                        <tr>
+                            <th scope="col">Titulo</th>
+                            <th scope="col">Tag</th>
+                            <th scope="col">Ação</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for apostila in apostilas_filtradas %}
+                                <tr class="linha">
+                                    <td>{{apostila.titulo}}</td>
+                                    <td>
+                                        {% for tag in apostila.tags.all %}
+                                            {{ tag.nome }}
+                                            {% if not forloop.last %}, 
+                                            {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                    <td><a href="{% url 'apostila' apostila.id %}" style="color: #fff; text-decoration: none;" class="btn-cadastro">Abrir</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
             </div>
         </div>
     </div>

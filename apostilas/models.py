@@ -16,6 +16,9 @@ class Apostila(models.Model):
     def __str__(self):
         return self.titulo
     
+    def lista_de_tags(self):
+        return list(self.tags.all())
+    
 class ViewApostila(models.Model):
     ip = models.GenericIPAddressField()
     apostila = models.ForeignKey(Apostila, on_delete=models.DO_NOTHING)
