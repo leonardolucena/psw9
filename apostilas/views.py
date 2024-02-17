@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Apostila, Tags, ViewApostila
+from django.db.models import Q
 from django.contrib.messages import constants
 from django.contrib import messages
 
@@ -48,11 +49,15 @@ def apostila(request, id):
 def listar_tags(request):
     if request.method == 'GET':
         apostilas = Apostila.objects.filter(user=request.user)
-        
+        apostilas_filtradas = apostilas
+
         tag_filtrar = request.GET.get('tags')
         if tag_filtrar:
-            apostilas_filtradas = apostilas.filter(tags__nome__icontains=tag_filtrar)
-        else:
-            apostilas_filtradas = apostilas
+            tags = [tag.strip() for tag in tag_filtrar.split(',')]
+            
+            condicoes = Q()
+            for tag in tags:
+                condicoes |= Q(tags__nome__icontains=tag)
+            apostilas_filtradas = apostilas_filtradas.filter(condicoes)
 
         return render(request, 'adicionar_apostilas.html', {'apostilas': apostilas, 'apostilas_filtradas': apostilas_filtradas})
