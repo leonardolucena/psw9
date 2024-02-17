@@ -21,6 +21,12 @@
         <div class="row">
             <div class="col-md">
                 <p class="fonte-secundaria">{{desafio.titulo}}</p>
+                {% for categoria in categorias %}
+                    <span class="badge-categoria">{{ categoria }}</span>
+                {% endfor %}
+                {% if desafio.flashcards.all %}
+                    <span class="dificuldade badge-dificuldade {{ desafio.flashcards.first.flashcard.css_dificuldade }}" data-dificuldade="{{ desafio.flashcards.first.flashcard.dificuldade }}"></span>
+                {% endif %}
                 <hr>
                 <p class="tituloSecundario" >Quantidade de acertos e erros</p>
                 <canvas id="grafico1"></canvas>
@@ -108,5 +114,25 @@
             
         });
 
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const dificuldadeMap = {
+                'D': 'Difícil',
+                'M': 'Médio',
+                'F': 'Fácil'
+            };
+    
+            const dificuldadeSpans = document.querySelectorAll(".dificuldade");
+            dificuldadeSpans.forEach(function(span) {
+                const dificuldade = span.getAttribute("data-dificuldade");
+                if (dificuldadeMap[dificuldade]) {
+                    span.textContent = dificuldadeMap[dificuldade];
+                } else {
+                    span.textContent = dificuldade;
+                }
+            });
+        });
     </script>
 {% endblock 'conteudo' %}

@@ -33,3 +33,21 @@
     letter-spacing: 0em;
     text-align: center;
 }
+
+.flashcard-facil{
+    background-color: #1DAB1A;
+    border: 0;
+    border-radius: 3px;
+}
+
+.flashcard-medio{
+    background-color: #E8910E;
+    border: 0;
+    border-radius: 3px;
+}
+
+.flashcard-dificil{
+    background-color: #FE0000;
+    border: 0;
+    border-radius: 3px;
+}

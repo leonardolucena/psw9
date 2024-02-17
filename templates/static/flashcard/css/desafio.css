@@ -1,7 +1,13 @@
 .badge-categoria{
     padding: 5px;
     background-color: #122342;
-    
+    border-radius: 3px;
+}
+
+.badge-dificuldade{
+    padding: 5px;
+    background-color: #122342;
+    border-radius: 3px;
 }
 
 .box-new-flashcard{
