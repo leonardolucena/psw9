@@ -18,10 +18,14 @@ def adicionar_apostilas(request):
         tags = request.POST.get('tags')
         list_tags = tags.split(',')
         
-        for tag in list_tags:
-            nova_tag = Tags(nome=tag)
-            nova_tag.save()
-            apostila.tags.add(nova_tag)
+        for tag_name in list_tags:
+            tag_existente = Tags.objects.filter(nome__iexact=tag_name).first()
+            if not tag_existente:
+                nova_tag = Tags(nome=tag_name)
+                nova_tag.save()
+                apostila.tags.add(nova_tag)
+            else:
+                apostila.tags.add(tag_existente)
         
         apostila.save()
         
