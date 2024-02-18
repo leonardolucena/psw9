@@ -73,8 +73,12 @@ def iniciar_desafio(request):
         categorias = request.POST.getlist('categoria')
         dificuldade = request.POST.get('dificuldade')
         qtd_perguntas = request.POST.get('qtd_perguntas')
+
+        if not qtd_perguntas:
+            mensagem = "Por favor, insira a quantidade de perguntas."
+            messages.add_message(request, messages.ERROR, mensagem)
+            return redirect('/flashcard/iniciar_desafio/')
         
-        # Verificar se a quantidade de perguntas é maior do que a quantidade disponível
         flashcards_disponiveis = (
             Flashcard.objects.filter(user=request.user)
             .filter(dificuldade=dificuldade)

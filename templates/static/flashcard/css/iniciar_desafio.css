@@ -27,3 +27,9 @@
 .form-select option {
     padding: 4px;
 }
+.containerDesafio{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    margin: 0 auto;
+}

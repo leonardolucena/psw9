@@ -19,7 +19,7 @@
         <h2 class="fonte-principal">Iniciar desafio</h2>
         <p class="fonte-secundaria">Escolha as categorias e a dificuldade do desafio</p>
         <form action="{% url 'iniciar_desafio' %}" method="POST">{% csrf_token %}
-            <div class="row">
+            <div class="containerDesafio">
                 <div class="col-md">
                     <label for="titulo" class="form-label">Título</label>
                     <input type="text" id="titulo" class="form-control" name="titulo">
