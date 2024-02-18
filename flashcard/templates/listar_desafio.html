@@ -57,22 +57,28 @@
                   </tr>
                 </thead>
                 <tbody>
-                    {% for desafio in desafios %}
+                    {% if desafios %}
+                        {% for desafio in desafios %}
+                            <tr class="linha">
+                                <th><a href="{% url 'desafio' desafio.id %}">{{desafio.id}}</a></th>
+                                <td>{{desafio.titulo}}</td>
+                                <td>{{desafio.get_dificuldade_display}}</td>
+                                <td>
+                                    {% if desafio.status == 'Em aberto' %}
+                                        <span class="badge bg-primary">Em aberto</span>
+                                    {% else %}
+                                        <span class="badge bg-success">Concluído</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
                         <tr class="linha">
-                            <th><a href="{% url 'desafio' desafio.id %}">{{desafio.id}}</a></th>
-                            <td>{{desafio.titulo}}</td>
-                            <td>{{desafio.get_dificuldade_display}}</td>
-                            <td>
-                                {% if desafio.status == 'Em aberto' %}
-                                    <span class="badge bg-primary">Em aberto</span>
-                                {% else %}
-                                    <span class="badge bg-success">Concluído</span>
-                                {% endif %}
-                            </td>
+                            <td colspan="4">Não há dados para a categoria ou dificuldade selecionadas.</td>
                         </tr>
-                    {% endfor %}
+                    {% endif %}
                 </tbody>
-              </table>
+            </table>
         </div>
     </div>
 {% endblock 'conteudo' %}

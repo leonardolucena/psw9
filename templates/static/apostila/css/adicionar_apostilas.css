@@ -1,3 +1,7 @@
 tr{
     border-radius: 0.375rem;
 }
+.tabela-limitada {
+    max-height: 320px;
+    overflow-y: auto;
+}

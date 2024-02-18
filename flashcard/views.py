@@ -74,6 +74,21 @@ def iniciar_desafio(request):
         dificuldade = request.POST.get('dificuldade')
         qtd_perguntas = request.POST.get('qtd_perguntas')
         
+        # Verificar se a quantidade de perguntas é maior do que a quantidade disponível
+        flashcards_disponiveis = (
+            Flashcard.objects.filter(user=request.user)
+            .filter(dificuldade=dificuldade)
+            .filter(categoria__id__in=categorias)
+        )
+        quantidade_existente = flashcards_disponiveis.count()
+        if quantidade_existente < int(qtd_perguntas):
+            mensagem = (
+                f'A quantidade máxima para a categoria e dificuldade escolhidas é de {quantidade_existente} '
+                'por favor, escolha uma quantidade igual ou inferior a essa quantidade.'
+            )
+            messages.add_message(request, messages.ERROR, mensagem)
+            return redirect('/flashcard/iniciar_desafio/')
+        
         desafio = Desafio(
             user=request.user,
             titulo=titulo,
@@ -132,7 +147,7 @@ def desafio(request, id):
         erros = desafio.flashcards.filter(respondido=True).filter(acertou=False).count()
         faltantes = desafio.flashcards.filter(respondido=False).count()
         
-        categorias = desafio.categoria.all().distinct()
+        categorias = desafio.flashcards.all().values_list('flashcard__categoria__nome', flat=True).distinct()
         
         return render(
             request,
@@ -161,12 +176,14 @@ def responder_flashcard(request, id):
 
 def relatorio(request, id):
     desafio = Desafio.objects.get(id=id)
-    acertos = desafio.flashcards.filter(acertou=True).count()
+    flashcards_desafio = desafio.flashcards.all().values_list('flashcard__categoria', flat=True)
+    categorias = Categoria.objects.filter(id__in=flashcards_desafio).distinct()
+
+    acertos = desafio.flashcards.filter(respondido=True, acertou=True).count()
     erros = desafio.flashcards.filter(respondido=True, acertou=False).count()
 
     dados = [acertos, erros]
 
-    categorias = desafio.categoria.all()
     name_categoria = [i.nome for i in categorias]
 
     dados2 = []
