@@ -7,6 +7,7 @@
     <link href="{% static 'flashcard/css/novo_flashcard.css' %}" rel="stylesheet">
     <link href="{% static 'flashcard/css/iniciar_desafio.css' %}" rel="stylesheet">
     <link href="{% static 'flashcard/css/desafio.css' %}" rel="stylesheet">
+    <link href="{% static 'flashcard/css/listar_desafio.css' %}" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 {% endblock 'cabecalho' %}
@@ -18,32 +19,36 @@
     <div class="container">
         <br>
         <br>
-        <div class="row">
-            <div class="col-md">
-                <form action="{% url 'listar_desafio' %}" method="GET">
-                <label for="categoria">Categoria</label>
-                <select name="categoria" id="categoria" class="form-select">
-                    <option value="">Todas as Categorias</option>
-                    {% for categoria in categorias %}
-                        <option value="{{categoria.id}}">{{categoria}}</option>
-                    {% endfor %}
-                </select>
+        <form action="{% url 'listar_desafio' %}" method="GET">
+            <div class="row">
+                <div class="col-md">
+                        <label for="categoria">Categoria</label>
+                        <select name="categoria" id="categoria" class="form-select">
+                            <option value="">Todas as Categorias</option>
+                            {% for categoria in categorias %}
+                                <option value="{{ categoria.id }}">{{ categoria }}</option>
+                            {% endfor %}
+                        </select>
+                </div>
+                <div class="col-md">
+                    <label for="dificuldade">Dificuldade</label>
+                    <select name="dificuldade" id="dificuldade" class="form-select">
+                        <option value="">Todas as Dificuldades</option>
+                        {% for dificuldade in dificuldades %}
+                            <option value="{{ dificuldade.0 }}">{{ dificuldade.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md">
+                    <br>
+                    <input type="submit" value="Filtrar" class="btn-cadastro">
+                </div>
+                <div class="col-md">
+                    <br>
+                    <a href="{% url 'iniciar_desafio' %}" class="btn-desafio">Criar Desafio</a>
+                </div>
             </div>
-            <div class="col-md">
-                <label for="dificuldade">Dificuldade</label>
-                <select name="dificuldade" id="dificuldade" class="form-select">
-                    <option value="">Todas as Dificuldades</option>
-                    {% for dificuldade in dificuldades %}
-                        <option value="{{dificuldade.0}}">{{dificuldade.1}}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="col-md">
-                <br>
-                <input type="submit" value="Filtrar" class="btn-cadastro">
-                </form>
-            </div>
-        </div>
+        </form>
         <br>
         <br>
         <div class="box-listar">

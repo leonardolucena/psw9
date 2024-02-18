@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Apostila, Tags, ViewApostila
+from .models import Apostila, Tags, ViewApostila, Avaliacao
 from django.db.models import Q
 from django.contrib.messages import constants
 from django.contrib import messages
@@ -44,7 +44,12 @@ def apostila(request, id):
     view.save()
     views_unicas = ViewApostila.objects.filter(apostila=apostila).values('ip').distinct().count()
     views_totais = ViewApostila.objects.filter(apostila=apostila).count()
-    return render(request, 'apostila.html', {'apostila': apostila, 'views_unicas': views_unicas, 'views_totais': views_totais})    
+
+    avaliacoes = []
+    for value, descricao in Apostila.AVALIACAO_CHOICES:
+        avaliacoes.append({'id': value, 'descricao': descricao})
+
+    return render(request, 'apostila.html', {'apostila': apostila, 'views_unicas': views_unicas, 'views_totais': views_totais, 'avaliacoes': avaliacoes})
 
 def listar_tags(request):
     if request.method == 'GET':
@@ -61,3 +66,13 @@ def listar_tags(request):
             apostilas_filtradas = apostilas_filtradas.filter(condicoes)
 
         return render(request, 'adicionar_apostilas.html', {'apostilas': apostilas, 'apostilas_filtradas': apostilas_filtradas})
+
+def salvar_avaliacao(request, id):
+    if request.method == 'POST':
+        apostila = Apostila.objects.get(id=id)
+        avaliacao_valor = request.POST.get('avaliacao')
+        if avaliacao_valor:
+            apostila.avaliacao = avaliacao_valor
+            apostila.save()
+
+    return redirect('apostila', id=id)

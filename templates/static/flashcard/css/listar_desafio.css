@@ -1,0 +1,17 @@
+.btn-desafio{
+    padding: 4px;
+    border-radius: 0.375rem;
+    background-color: #000716;
+    border: none;
+    border: 1px solid #58fcd5;
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 25px;
+    padding-right: 25px;
+    color: #fff;
+    text-decoration: none;
+}
+.btn-desafio:hover{
+    background-color: #35b395;
+    transition: 0.5s;
+}

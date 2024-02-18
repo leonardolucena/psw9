@@ -29,7 +29,6 @@
                 {% for flash in desafio.flashcards.all %}
                     <div class="box-new-flashcard {% if flash.respondido %}op2{% endif %}">
                         <div class="flashcard {{flash.flashcard.css_dificuldade}}">
-
                             <div class="flashcard-categoria">
                                 {{flash.flashcard.categoria}}
                             </div>
@@ -50,10 +49,7 @@
                                 {% else %}
                                     <span class="badge bg-danger">Errou</span>
                                 {% endif%}
-                            
                             {% endif %}
-                            
-                            
                         </div>
                         <div class="resposta-flashcard" id="{{flash.id}}">
                             {{flash.flashcard.resposta}}
@@ -62,10 +58,8 @@
                     <br>
                     <br>
                 {% endfor %}
-
             </div>
             <div class="col-md">
-
                 <h3 class="fonte-secundaria">Resultado</h3>
                 <p class="fonte-p">Acertos: {{acertos}}</p>
                 <p class="fonte-p">Erros: {{erros}}</p>

@@ -20,14 +20,39 @@
         <br><br>
         <div class="row">
             <div class="col-md">
+                <p class="text_avaliacao" >{{apostila.titulo}}</p>
                 <a href="{{apostila.arquivo.url}}">
                     <div style="width: 100%;" id="pdf-container"></div>
                 </a>
-
             </div>
             <div class="col-md">
-                <p>Views únicas: {{views_unicas}}</p>
-                <p>Views totais: {{views_totais}}</p>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <p>Views únicas: {{ views_unicas }}</p>
+                        <p>Views totais: {{ views_totais }}</p>
+                    </div>
+                    <div class="d-flex flex-column align-items-center">
+                        <p>
+                            <strong class="text_avaliacao">Avaliação</strong>
+                            {% if apostila.avaliacao %}
+                               <p>{{ apostila.get_avaliacao_display }}</p>
+                            {% else %}
+                                <p>Sem avaliações</p>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+                <hr>
+                <p class="cabecario_avaliacao">Deixe sua avaliação</p>
+                <form action="{% url 'salvar_avaliacao' apostila.id %}" method="POST">{% csrf_token %}
+                    <select name="avaliacao" id="avaliacao" class="form-select2">
+                        <option value="">Selecione uma avaliação</option>
+                        {% for avaliacao in avaliacoes %}
+                            <option value="{{ avaliacao.id }}">{{ avaliacao.descricao }}</option>
+                        {% endfor %}
+                    </select>                        
+                    <input type="submit" class="btn-cadastro mt-10" value="Avaliar">
+                </form>
             </div>
         </div>
     </div>

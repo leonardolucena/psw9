@@ -1,0 +1,26 @@
+.mt-10{
+    margin-top: 10px;
+}
+.form-select2 {
+    width: 220px;
+    padding: 6px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 6px;
+}
+.cabecario_avaliacao{
+    font-family: Inter;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 42px;
+    letter-spacing: 0em;
+}
+.text_avaliacao{
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 700;
+}
+p{
+    margin-bottom: 0;
+}
